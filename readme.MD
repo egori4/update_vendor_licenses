@@ -2,10 +2,10 @@
 
 * Install python3
 
-* Install paramiko module
+* Install paramiko module<br>
 	pip install paramiko
 
-* Install scp module
+* Install scp module<br>
 	pip install scp
 
 # About
@@ -15,11 +15,11 @@ Script purpose is to automate the process of license renewal for the vendors fro
 Below are the steps
 
 1. Connect to the License Server IP through SSH (function "connect_to_license_server")
-2. Run the following commands on the License Server IP to get lmstat output (function "get_current_license")
-		sudo su edatools
-		cd ~
-		source ~/{vendor_name}.setup
-		lmstat -c {vendor_ssh_port}@license
+2. Run the following commands on the License Server IP to get lmstat output (function "get_current_license")<br>
+sudo su edatools <br>
+cd ~<br>
+source ~/{vendor_name}.setup<br>
+lmstat -c {vendor_ssh_port}@license<br>
 3. Parse lmstat output and get the current license path (function "get_vendor_lic_location")
 4. Get the current license content (function "get_current_vendor_lic_output")
 5. Parse current license content and get current vendor "host ID" (function "get_vendor_host_id")
@@ -40,9 +40,11 @@ Below are the steps
 
 	Below are the preset defaults
 
-	new_local_lic_path = "./new_lic/" #this is a local script path where the new license file should exist (before we modify hostid and path)
+	new_local_lic_path = './new_lic/' #this is a local script path where the new license file should exist (before we modify hostid and path)
 
-	new_remote_lic_path = "/tmp/"
+	new_remote_lic_path = f'/data/tools/{vendor_name}/' # this is a remote path on the license server where new license will be uploaded
+	
+	log_path = f'/data/tools/{vendor_name}/lic_admin/log/log.log' #this is a remote path on the license server for the log
 
 	debug_run = True # False = limited log, True = extensive logging
 
@@ -68,17 +70,13 @@ Below are the steps
 		Enter vendor name from the list [Synopsys, Cadence, Amiq, Ansys, Cliosoft, Mentor, Real-Intent]
 	
 
-* !!! To remove !!!
+* !!! To be removed  !!!
 	1. Temp vars for testing
 
-		lic_srv_ip = '10.107.184.4'
+		lic_srv_ip = 'x.x.x.x'
 		vendor_ssh_port = 22
-		user = 'radware'
-		password = 'radadmin'
+		user = 'test'
+		password = 'test'
 		vendor_name = 'Cadence'
 
-	2. lmstat_output_from_efrat from the function get_current_license
-
-	3. Get log path, function check_log_file
-
-	 	log_path = '/some_log_path/some_log_file.log' # !!!!!!! Validate path to the log file, add error validations
+	2. lmstat var from Efrat
